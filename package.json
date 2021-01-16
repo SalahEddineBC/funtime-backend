@@ -1,0 +1,20 @@
+{
+  "name": "funtime",
+  "version": "1.0.0",
+  "description": "funtime frontend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "author": "funtime team",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "jwt-then": "^1.0.1",
+    "mongoose": "^5.11.8",
+    "socket.io": "^3.0.4"
+  }
+}
