@@ -19,6 +19,23 @@ app.get('/', (request, response) => {
   response.send('<h1>Funtime server</h1>');
 });
 
+// socket listners
+io.on('connection', (socket) => {
+  socket.on('join-room', (roomID, peerID) => {
+    console.log(`${peerID} connected to room ${roomID}`);
+    socket.join(roomID);
+    socket.to(roomID).broadcast.emit('user-connected', peerID);
+
+    socket.on('disconnect', () => {
+      socket.to(roomID).broadcast.emit('user-disconnected', peerID);
+      console.log(`${peerID} disconnected from room ${roomID}`);
+    });
+    
+    socket.on('game-started', () => {
+      socket.to(roomID).broadcast.emit('game-started');
+    });
+  });
+});
 
 http.listen(port, () => {
   console.log(`App listening on port: ${port}`);
