@@ -19,6 +19,14 @@ app.get('/', (request, response) => {
   response.send('<h1>Funtime server</h1>');
 });
 
+// Connect to DB
+mongoose.connect(DB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true
+})
+
 // socket listners
 io.on('connection', (socket) => {
   socket.on('join-room', (roomID, peerID) => {
