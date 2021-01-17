@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
     });
     
     socket.on('update-scores', () => {
-     socket.to(roomID).broadcast.emit('update');
+     socket.to(roomID).broadcast.emit('update-scores');
    });
   });
 });
