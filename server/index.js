@@ -42,6 +42,10 @@ io.on('connection', (socket) => {
     socket.on('game-started', () => {
       socket.to(roomID).broadcast.emit('game-started');
     });
+
+    socket.on('pose', (poseKey) => {
+      socket.to(roomID).broadcast.emit('pose', poseKey);
+    });
   });
 });
 
