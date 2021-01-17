@@ -7,7 +7,7 @@ const io = require('socket.io')(http, {
     methods: ['GET', 'POST']
   }
 });
-const bodyParser= require('body-parser');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const apiRoutes = require('./api');
 const port = process.env.PORT || 9000;
@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
       socket.to(roomID).broadcast.emit('user-disconnected', peerID);
       console.log(`${peerID} disconnected from room ${roomID}`);
     });
-    
+
     socket.on('game-started', () => {
       socket.to(roomID).broadcast.emit('game-started');
     });
@@ -46,10 +46,14 @@ io.on('connection', (socket) => {
     socket.on('pose', (poseKey) => {
       socket.to(roomID).broadcast.emit('pose', poseKey);
     });
-    
+
     socket.on('update-scores', () => {
-     socket.to(roomID).broadcast.emit('update-scores');
-   });
+      socket.to(roomID).broadcast.emit('update-scores');
+    });
+
+    socket.on('myscore', (id, points) => {
+      socket.to(roomID).broadcast.emit('remotescore', id, points);
+    });
   });
 });
 
