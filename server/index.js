@@ -46,6 +46,10 @@ io.on('connection', (socket) => {
     socket.on('pose', (poseKey) => {
       socket.to(roomID).broadcast.emit('pose', poseKey);
     });
+    
+    socket.on('update-scores', () => {
+     socket.to(roomID).broadcast.emit('update');
+   });
   });
 });
 
